@@ -1,8 +1,4 @@
-@import 'common';
-
-// injector
-// endinjector
-
+@import "common.scss";
 @import "theme/_socicon.scss";
 @import "theme/_layout.scss";
 @import 'theme/buttons.scss';
@@ -35,7 +31,6 @@ $text-color: #ffffff;
   align-items: center;
   height: 100%;
   width: 100%;
-  background: url('../assets/pictures/back.jpg');
 }
 
 .auth-block {

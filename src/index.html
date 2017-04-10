@@ -27,7 +27,7 @@
 <body>
 <div class="body-bg"></div>
 <main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
-
+  <div ng-if="loggedIn">
   <ba-sidebar></ba-sidebar>
   <page-top></page-top>
 
@@ -50,8 +50,12 @@
       </ul>
     </div>
   </footer>
-
   <back-top></back-top>
+  </div>
+  <div ng-if="!loggedIn">
+    <div ui-view autoscroll="true" autoscroll-body-top></div>
+
+  </div>
 </main>
 
 <div id="preloader" ng-show="!$pageFinishedLoading">

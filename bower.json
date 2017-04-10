@@ -22,7 +22,6 @@
     "chart.js": "~2.4.0",
     "Ionicons": "ionicons#~2.0.1",
     "amcharts": "~3.15.2",
-
     "angular": "~1.5.8",
     "angular-route": "~1.5.8",
     "angular-slimscroll": "~1.1.5",
@@ -48,7 +47,8 @@
     "angular-animate": "~1.5.8",
     "textAngular": "~1.4.6",
     "angular-xeditable": "~0.5.0",
-    "angular-ui-select": "^0.19.6"
+    "angular-ui-select": "^0.19.6",
+    "angular-cookies": "1.5.8"
   },
   "resolutions": {
     "angular": "~1.5.9",
