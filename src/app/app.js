@@ -17,5 +17,21 @@ angular.module('BlurAdmin', [
     'BlurAdmin.pages',
     'utils.apiUrls',
     'utils.notification',
-    'utils.httpWrapper'
-]);
+    'utils.httpWrapper',
+    'utils.confirmModal'
+]).config(['$httpProvider', function($httpProvider) {
+
+    $httpProvider.interceptors.push(function($q) {
+        return {
+            'responseError': function(rejection){
+                var defer = $q.defer();
+                if(rejection.status == 401){
+                    console.log("401");
+                }
+                defer.reject(rejection);
+                return defer.promise;
+            }
+        };
+    });
+
+}]);

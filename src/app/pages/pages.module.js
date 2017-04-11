@@ -9,10 +9,11 @@
         'ui.router',
         'BlurAdmin.pages.login',
         'BlurAdmin.pages.dashboard'
-        /*'BlurAdmin.pages.ui',
+     /*   'BlurAdmin.pages.search',
+        'BlurAdmin.pages.tables',
+        'BlurAdmin.pages.ui',
         'BlurAdmin.pages.components',
         'BlurAdmin.pages.form',
-        'BlurAdmin.pages.tables',
         'BlurAdmin.pages.charts',
         'BlurAdmin.pages.maps',
         'BlurAdmin.pages.profile'*/
@@ -21,29 +22,13 @@
         .run(runConfig)
         .constant();
     /** @ngInject */
-    function runConfig($rootScope, $state, $cookies, $http, UrlConstants, notificationService) {
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-            if (!$rootScope.loggedIn) {
-                if (toState.name != 'login') {
-                    event.preventDefault();
-                    $state.go('login');
-                }
-            } else {
-                if (toState.name == 'login') {
-                    notificationService.info('You are already LoggedIn!');
-                    event.preventDefault();
-                    $state.go('dashboard');
-                }
-            }
-        });
+    function runConfig($rootScope, $state, $cookies, $http, UrlConstants, notificationService, $timeout) {
         if ($cookies.get('token') && $cookies.get('userId')) {
             $rootScope.access_token = $cookies.get('token');
             $rootScope.userId = $cookies.get('userId');
-            $http.get(UrlConstants.heartBeat + $rootScope.userId + '?access_token=' + $rootScope.access_token).success(function (response) {
+            $http.get(UrlConstants.clientsApi + $rootScope.userId + '?access_token=' + $rootScope.access_token).success(function (response) {
                 console.log(response);
-                notificationService.success('success', 'success');
                 $rootScope.loggedIn = true;
-                $state.go('dashboard');
             }).error(function (response) {
                 console.log(response);
                 notificationService.error('error', 'error');
@@ -53,6 +38,32 @@
         } else {
             $rootScope.loggedIn = false;
             $state.go('login');
+        }
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            if (!$rootScope.loggedIn) {
+                if (toState.name != 'login') {
+                    event.preventDefault();
+                    $http.get(UrlConstants.clientsApi + $rootScope.userId + '?access_token=' + $rootScope.access_token).success(function (response) {
+                        $rootScope.loggedIn = true;
+                        $state.go(toState.name);
+                    }).error(function (response) {
+                        console.log(response);
+                        notificationService.error('error', 'error');
+                        $rootScope.loggedIn = false;
+                        $state.go('login');
+                    })
+                }
+            } else {
+                if (toState.name == 'login') {
+                    notificationService.info('You are already LoggedIn!');
+                    event.preventDefault();
+                    $state.go('dashboard');
+                }
+            }
+        });
+        $rootScope.convertTimestamp = function (time){
+            var date = new Date(time);
+            console.log(date);
         }
     }
 
@@ -79,19 +90,19 @@
          }]
          });*/
         /*baSidebarServiceProvider.addStaticItem({
-            title: 'Menu Level 1',
-            icon: 'ion-ios-more',
-            subMenu: [{
-                title: 'Menu Level 1.1',
-                disabled: true
-            }, {
-                title: 'Menu Level 1.2',
-                subMenu: [{
-                    title: 'Menu Level 1.2.1',
-                    disabled: true
-                }]
-            }]
-        });*/
+         title: 'Menu Level 1',
+         icon: 'ion-ios-more',
+         subMenu: [{
+         title: 'Menu Level 1.1',
+         disabled: true
+         }, {
+         title: 'Menu Level 1.2',
+         subMenu: [{
+         title: 'Menu Level 1.2.1',
+         disabled: true
+         }]
+         }]
+         });*/
     }
 
 })();

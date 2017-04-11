@@ -5,6 +5,8 @@ clientsApi = apiUrl + 'clients/';
 
 angular.module("utils.apiUrls", []).constant("UrlConstants", {
     login: clientsApi + 'login',
-    heartBeat: clientsApi,
+    campaigns: apiUrl + 'campaigns/',
+    clientsApi: clientsApi,
+    apiUrl: apiUrl
 
 });

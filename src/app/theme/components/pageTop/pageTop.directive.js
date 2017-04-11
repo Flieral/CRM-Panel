@@ -9,7 +9,6 @@
         .directive('pageTop', pageTop)
         .controller('header', function ($rootScope, $http, UrlConstants, httpWrapper) {
 
-
         });
 
     /** @ngInject */

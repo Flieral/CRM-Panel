@@ -1,63 +1,117 @@
-<dashboard-pie-chart></dashboard-pie-chart>
-
-<!--<div class="row">
-  <div class="col-lg-6 col-md-12 col-sm-12"
-       ba-panel
-       ba-panel-title="Acquisition Channels"
-       ba-panel-class="medium-panel traffic-panel">
-    <traffic-chart></traffic-chart>
-  </div>
-  <div class="col-lg-6 col-md-12 col-sm-12"
-       ba-panel
-       ba-panel-title="Users by Country"
-       ba-panel-class="medium-panel">
-    <dashboard-map></dashboard-map>
-  </div>
-</div>-->
-
 <div class="row">
-  <div class="col-xlg-9 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-    <div class="row">
-      <div class="col-xlg-8 col-lg-12 col-md-12 col-sm-7 col-xs-12"
-           ba-panel
-           ba-panel-title="Revenue"
-           ba-panel-class="medium-panel">
-        <dashboard-line-chart></dashboard-line-chart>
-      </div>
-      <div class="col-xlg-4 col-lg-12 col-md-12 col-sm-5 col-xs-12"
-           ba-panel
-           ba-panel-class="popular-app medium-panel">
-        <popular-app></popular-app>
-      </div>
+    <div ba-panel
+         ba-panel-class="tabs-panel with-scroll">
+        <uib-tabset active="model.selectedTab">
+            <uib-tab index="0" heading="All Clients">
+                <div class="horizontal-scroll">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr class="black-muted-bg">
+                            <th>#</th>
+                            <th>Company Name</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Ip Address</th>
+                            <th>Country</th>
+                            <th>Operation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-click="vm.getClientsCampaign(client)" ng-class="{'secendory-light-back': (client.selected)}"
+                            ng-repeat="client in vm.allClients track by $index" class="no-top-border touchable">
+                            <td>{{$index + 1}}</td>
+                            <td>{{client.companyName}}</td>
+                            <td>{{client.email}}</td>
+                            <td>{{client.username}}</td>
+                            <td>{{client.registrationIPAddress}}</td>
+                            <td>{{client.registrationCountry}}</td>
+                            <td>
+                                <button class="btn btn-with-icon btn-info" ng-click="vm.editClient(client)"><i class="ion-edit"></i>Edit</button>
+                                <button class="btn btn-with-icon btn-danger" ng-click="vm.removeClient(client)"><i class="ion-trash-a"></i>Remove</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </uib-tab>
+            <uib-tab index="1" heading="Client's campaings">
+                <div class="horizontal-scroll">
+                    <h2 ng-if="vm.selection.client == null">Please select a client at first!</h2>
+                    <h2 ng-if="vm.clientsCampaigns.length <= 0">There is no campaign registered with selected client!</h2>
+                    <table class="table table-hover" ng-if="vm.clientsCampaigns.length > 0 && vm.selection.client != null">
+                        <thead>
+                        <tr class="black-muted-bg">
+                            <th>#</th>
+                            <th>Campaign Name</th>
+                            <th>Message</th>
+                            <th>Media Style</th>
+                            <th>Start Style</th>
+                            <th>Status</th>
+                            <th>Budget</th>
+                            <th>Beginning Time</th>
+                            <th>Ending Time</th>
+                            <th>Operation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-click="vm.getCampaignsSubcampaign(campaign)"  ng-repeat="campaign in vm.clientsCampaigns track by $index" ng-class="{'secendory-light-back': (campaign.selected)}" class="no-top-border touchable">
+                            <td>{{$index + 1}}</td>
+                            <td>{{campaign.name}}</td>
+                            <td>{{campaign.message}}</td>
+                            <td>{{campaign.mediaStyle}}</td>
+                            <td>{{campaign.startStyle}}</td>
+                            <td>{{campaign.status}}</td>
+                            <td>{{campaign.budget}} $</td>
+                            <td>{{campaign.beginningTime | date:'MM/dd/yyyy @ h:mma'}}</td>
+                            <td>{{campaign.endingTime | date:'MM/dd/yyyy @ h:mma'}}</td>
+                            <td>
+                                <button class="btn btn-with-icon btn-info" ng-click="vm.editCampaign(campaign)"><i class="ion-edit"></i>Edit</button>
+                                <button class="btn btn-with-icon btn-danger" ng-click="vm.removeCampaign(campaign)"><i class="ion-trash-a"></i>Remove</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </uib-tab>
+            <uib-tab index="2" heading="Campaign's subcampaign">
+                <div class="horizontal-scroll">
+                    <h2 ng-if="vm.selection.client == null">Please select a client at first!</h2>
+                    <h2 ng-if="vm.selection.campaign == null">Please select a campaign at first!</h2>
+                    <h2 ng-if="vm.campaignsSubcampaign.length <= 0 && vm.selection.campaign != null">There is no subcampaign registered with selected campaign!</h2>
+                    <table class="table table-hover" ng-if="vm.campaignsSubcampaign.length > 0 && vm.selection.campaign != null">
+                        <thead>
+                        <tr class="black-muted-bg">
+                            <th>#</th>
+                            <th>Subcampaign Name</th>
+                            <th>Minimum Budget</th>
+                            <th>Plan</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Style</th>
+                            <th>Operation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-click="vm.getCampaignsSubcampaign()"  ng-repeat="subcampaign in vm.campaignsSubcampaign track by $index" ng-class="{'secendory-light-back': (subcampaign.selected)}" class="no-top-border">
+                            <td>{{$index + 1}}</td>
+                            <td>{{subcampaign.name}}</td>
+                            <td>{{subcampaign.minBudget}} $</td>
+                            <td>{{subcampaign.plan}}</td>
+                            <td>{{subcampaign.price}} $</td>
+                            <td>{{subcampaign.status}}</td>
+                            <td>{{subcampaign.style}}</td>
+                            <td>
+                                <button class="btn btn-with-icon btn-info" ng-click="vm.editSubcampaign(subcampaign)"><i class="ion-edit"></i>Edit</button>
+                                <button class="btn btn-with-icon btn-danger" ng-click="vm.removeSubcampaign(subcampaign)"><i class="ion-trash-a"></i>Remove</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </uib-tab>
+        </uib-tabset>
     </div>
-  </div>
-  <div class="col-xlg-3 col-lg-6 col-md-6 col-sm-12 col-xs-12"
-       ba-panel
-       ba-panel-title="Feed"
-       ba-panel-class="large-panel with-scroll feed-panel">
-    <blur-feed></blur-feed>
-  </div>
 </div>
 
-<div class="row shift-up">
-  <div class="col-xlg-3 col-lg-6 col-md-6 col-xs-12"
-       ba-panel
-       ba-panel-title="To Do List"
-       ba-panel-class="xmedium-panel feed-comply-panel with-scroll todo-panel">
-    <dashboard-todo></dashboard-todo>
-  </div>
-  <!--<div class="col-xlg-6 col-lg-6 col-md-6 col-xs-12"
-       ba-panel
-       ba-panel-title="Calendar"
-       ba-panel-class="xmedium-panel feed-comply-panel with-scroll calendar-panel">
-    <dashboard-calendar></dashboard-calendar>
-  </div>-->
-</div>
 
-<!--<div class="row">
-  <div class="col-lg-4 col-sm-6 col-xs-12">
-    <div ba-panel ba-panel-title="Weather" ba-panel-class="medium-panel with-scroll">
-      <blur-weather forecast="5"></blur-weather>
-    </div>
-  </div>
-</div>-->
+
