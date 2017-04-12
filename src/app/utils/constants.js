@@ -7,6 +7,7 @@ angular.module("utils.apiUrls", []).constant("UrlConstants", {
     login: clientsApi + 'login',
     campaigns: apiUrl + 'campaigns/',
     clientsApi: clientsApi,
+    subcampaign: apiUrl + 'subcampaigns/',
     apiUrl: apiUrl
 
 });

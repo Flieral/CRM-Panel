@@ -25,7 +25,7 @@
             });
     }
 
-    function dashboardControllerFunction($http, $scope, $rootScope, notificationService, httpWrapper, UrlConstants, confirmModal) {
+    function dashboardControllerFunction($uibModal, $scope, $rootScope, notificationService, httpWrapper, UrlConstants, confirmModal) {
         var vm = this;
         vm.selection = {};
         $scope.model = {};
@@ -64,6 +64,9 @@
                 $scope.model.selectedTab = 2;
             })
         };
+        vm.editClient = function (client) {
+            $uibModal.open({})
+        };
         vm.removeClient = function (client) {
             $scope.model.selectedTab = 0;
             confirmModal.open('Removing ' + client.username, 'Are you sure to remove the client? The action could not be undone!').then(function () {
@@ -80,14 +83,14 @@
         vm.removeCampaign = function (campaign) {
             $scope.model.selectedTab = 0;
             confirmModal.open('Removing ' + campaign.name, 'Are you sure to remove the campaign? The action could not be undone!').then(function () {
-                httpWrapper.delete(UrlConstants.clientsApi + client.id + '/campaign/' + campaign.id).success(function () {
+                httpWrapper.delete(UrlConstants.clientsApi + campaign.clientId + '/campaign/' + campaign.id).success(function () {
                     notificationService.success('Success', 'Deleted the campaign successfully!');
                 }).error(function () {
                     notificationService.error('Error', 'There was an error in removing the campaign!');
                 })
             })
         };
-        vm.removeCampaign = function (campaign) {
+        vm.removeSubcampaign = function (subcampaign) {
             $scope.model.selectedTab = 0;
             confirmModal.open('Removing ' + campaign.name, 'Are you sure to remove the campaign? The action could not be undone!').then(function () {
                 httpWrapper.delete(UrlConstants.clientsApi + client.id + '/campaign/' + campaign.id).success(function () {
@@ -96,7 +99,22 @@
                     notificationService.error('Error', 'There was an error in removing the campaign!');
                 })
             })
-        }
+        };
+        vm.showSettings = function (subcampaign) {
+            httpWrapper.get(UrlConstants.subcampaign + subcampaign.id +'/setting').success(function (response){
+                $uibModal.open({
+                    templateUrl: 'app/pages/dashboard/modals/subcampaignInfo.html',
+                    size: 'md',
+                    controllerAs: 'sh',
+                    controller: function (){
+                        var sh = this;
+                        sh.subcampaign = subcampaign;
+                        sh.info = response;
+                        console.log(sh.info)
+                    }
+                })
+            })
+        };
     }
 
 })();
