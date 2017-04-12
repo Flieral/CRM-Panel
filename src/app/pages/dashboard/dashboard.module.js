@@ -106,11 +106,13 @@
                     templateUrl: 'app/pages/dashboard/modals/subcampaignInfo.html',
                     size: 'md',
                     controllerAs: 'sh',
-                    controller: function (){
+                    controller: function ($uibModalInstance){
                         var sh = this;
                         sh.subcampaign = subcampaign;
                         sh.info = response;
-                        console.log(sh.info)
+                        sh.cancel = function (){
+                            $uibModalInstance.dismiss('cancel');
+                        }
                     }
                 })
             })
