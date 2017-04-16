@@ -18,9 +18,9 @@ angular.module('BlurAdmin', [
     'utils.apiUrls',
     'utils.notification',
     'utils.httpWrapper',
-    'utils.confirmModal'
+    'utils.confirmModal',
+    'utils.filters'
 ]).config(['$httpProvider', function($httpProvider) {
-
     $httpProvider.interceptors.push(function($q) {
         return {
             'responseError': function(rejection){

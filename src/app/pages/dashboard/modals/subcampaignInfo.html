@@ -11,8 +11,8 @@
     <p><strong>User Label: </strong>  <span ng-repeat="item in sh.info.userLabel">{{item}} </span></p>
     <p><strong>Connection: </strong>  <span ng-repeat="item in sh.info.connection">{{item}} </span></p>
     <p><strong>Categories: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.category">{{item}}</span></p>
-    <p><strong>Countries: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.country">{{item}}</span></p>
-    <p><strong>Languages: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.language">{{item}}</span></p>
+    <p><strong>Countries: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.country">{{item | countryMap}}</span></p>
+    <p><strong>Languages: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.language">{{item | languageMap}}</span></p>
     <p><strong>Devices: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.device">{{item}}</span></p>
     <p><strong>Operating Systems: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.os">{{item}}</span></p>
 </div>

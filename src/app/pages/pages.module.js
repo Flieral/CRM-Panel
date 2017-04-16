@@ -23,6 +23,13 @@
         .constant();
     /** @ngInject */
     function runConfig($rootScope, $state, $cookies, $http, UrlConstants, notificationService, $timeout) {
+        $rootScope.configs = {};
+        $http.get('/assets/conf/country.json').success(function(response){
+            $rootScope.configs.countries = response;
+        });
+        $http.get('/assets/conf/language.json').success(function(response){
+            $rootScope.configs.languages = response;
+        });
         if ($cookies.get('token') && $cookies.get('userId')) {
             $rootScope.access_token = $cookies.get('token');
             $rootScope.userId = $cookies.get('userId');
