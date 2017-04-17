@@ -121,10 +121,12 @@
             var data = {
                 status: str
             };
-            httpWrapper.put(UrlConstants.subcampaign + subcampaign.id + '/setting', data)
+            httpWrapper.put(UrlConstants.campaigns + vm.selection.campaign.id + '/subcampaigns/' + subcampaign.id, data)
                 .success(function (response){
                 notificationService.success('Status Set Successfully');
                 subcampaign.status = str;
+            }).error(function (){
+                notificationService.error("There was an error in changing status");
             })
         }
     }
