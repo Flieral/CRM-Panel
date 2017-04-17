@@ -17,7 +17,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-click="vm.getClientsCampaign(client)" ng-class="{'secendory-light-back': (client.selected)}"
+                        <tr ng-click="vm.getClientsApplications(client)" ng-class="{'secendory-light-back': (client.selected)}"
                             ng-repeat="client in vm.allClients track by $index" class="no-top-border touchable">
                             <td>{{$index + 1}}</td>
                             <td>{{client.companyName}}</td>
@@ -34,10 +34,10 @@
                     </table>
                 </div>
             </uib-tab>
-            <uib-tab index="1" heading="Client's campaings">
+            <uib-tab index="1" heading="Client's Applications">
                 <div class="horizontal-scroll">
                     <h2 ng-if="vm.selection.client == null">Please select a client at first!</h2>
-                    <h2 ng-if="vm.clientsCampaigns.length <= 0">There is no campaign registered with selected client!</h2>
+                    <h2 ng-if="vm.clientsCampaigns.length <= 0">There is no application registered with selected client!</h2>
                     <table class="table table-hover" ng-if="vm.clientsCampaigns.length > 0 && vm.selection.client != null">
                         <thead>
                         <tr class="black-muted-bg">
@@ -73,10 +73,10 @@
                     </table>
                 </div>
             </uib-tab>
-            <uib-tab index="2" heading="Campaign's subcampaign">
+            <uib-tab index="2" heading="Application's Placement">
                 <div class="horizontal-scroll">
                     <h2 ng-if="vm.selection.client == null">Please select a client at first!</h2>
-                    <h2 ng-if="vm.selection.campaign == null">Please select a campaign at first!</h2>
+                    <h2 ng-if="vm.selection.campaign == null">Please select an application at first!</h2>
                     <h2 ng-if="vm.campaignsSubcampaign.length <= 0 && vm.selection.campaign != null">There is no subcampaign registered with selected campaign!</h2>
                     <table class="table table-hover" ng-if="vm.campaignsSubcampaign.length > 0 && vm.selection.campaign != null">
                         <thead>
