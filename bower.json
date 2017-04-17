@@ -48,7 +48,8 @@
     "textAngular": "~1.4.6",
     "angular-xeditable": "~0.5.0",
     "angular-ui-select": "^0.19.6",
-    "angular-cookies": "1.5.8"
+    "angular-cookies": "1.5.8",
+    "angular-tooltips": "^1.1.10"
   },
   "resolutions": {
     "angular": "~1.5.9",

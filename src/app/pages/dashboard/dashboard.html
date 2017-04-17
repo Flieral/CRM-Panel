@@ -78,7 +78,7 @@
                     <h2 ng-if="vm.selection.client == null">Please select a client at first!</h2>
                     <h2 ng-if="vm.selection.campaign == null">Please select a campaign at first!</h2>
                     <h2 ng-if="vm.campaignsSubcampaign.length <= 0 && vm.selection.campaign != null">There is no subcampaign registered with selected campaign!</h2>
-                    <table class="table table-hover" ng-if="vm.campaignsSubcampaign.length > 0 && vm.selection.campaign != null">
+                    <table class="table table-hover subcampaign-table" ng-if="vm.campaignsSubcampaign.length > 0 && vm.selection.campaign != null">
                         <thead>
                         <tr class="black-muted-bg">
                             <th>#</th>
@@ -98,7 +98,11 @@
                             <td>{{subcampaign.minBudget}} $</td>
                             <td>{{subcampaign.plan}}</td>
                             <td>{{subcampaign.price}} $</td>
-                            <td>{{subcampaign.status}}</td>
+                            <td class="status-cell">
+                                <button ng-click="vm.setStatus(subcampaign, 'Pending')" uib-tooltip="Pending" ng-disabled="subcampaign.status == 'Pending'" class="btn btn-default"> <span><i class="ion-minus-round color-warning"></i></span></button>
+                                <button ng-click="vm.setStatus(subcampaign, 'Approved')" uib-tooltip="Approved" ng-disabled="subcampaign.status == 'Approved'" class="btn btn-default"><span><i class="ion-checkmark color-success"></i></span></button>
+                                <button ng-click="vm.setStatus(subcampaign, 'Suspend')" uib-tooltip="Suspend" ng-disabled="subcampaign.status == 'Suspend'" class="btn btn-default"> <span><i class="ion-close-round color-danger"></i></span></button>
+                            </td>
                             <td>{{subcampaign.style}}</td>
                             <td>
                                 <button class="btn btn-with-icon btn-info" ng-click="vm.editSubcampaign(subcampaign)"><i class="ion-edit"></i>Edit</button>

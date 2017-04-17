@@ -179,3 +179,30 @@ div.panel{
     font-size: 20px;
   }
 }
+.color-warning{
+  color: $warning;
+}
+.color-success{
+  color: $success;
+}
+.color-danger{
+  color: $danger;
+}
+.subcampaign-table{
+  tr{
+    td{
+      button[disabled]{
+        background: #e8d2cc !important;
+      }
+      &.status-cell{
+        button:hover{
+          -webkit-transform: scale(1) !important;
+          -moz-transform: scale(1) !important;
+          -ms-transform: scale(1) !important;
+          -o-transform: scale(1) !important;
+          transform: scale(1) !important;
+        }
+      }
+    }
+  }
+}

@@ -117,6 +117,16 @@
                 })
             })
         };
+        vm.setStatus = function (subcampaign, str){
+            var data = {
+                status: str
+            };
+            httpWrapper.put(UrlConstants.subcampaign + subcampaign.id + '/setting', data)
+                .success(function (response){
+                notificationService.success('Status Set Successfully');
+                subcampaign.status = str;
+            })
+        }
     }
 
 })();
