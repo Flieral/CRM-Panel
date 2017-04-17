@@ -175,4 +175,7 @@ div.panel{
   border-radius: 15px;
   display: inline-block;
   margin: 2px 4px;
+  .ion-ios-more, .ion-ios-arrow-left {
+    font-size: 20px;
+  }
 }

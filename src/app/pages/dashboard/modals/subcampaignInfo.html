@@ -14,12 +14,18 @@
     <p>
         <strong>Countries: </strong>
         <span ng-if="!sh.countryCollapsed && $index < 5" class="secondary-dark-badge" ng-repeat="item in sh.info.country track by $index">{{item | countryMap}}</span>
-        <span class="touchable" ng-if="sh.info.country.length > 5 && !sh.countryCollapsed" ng-click="sh.countryCollapsed = 1">... SHOW ALL</span>
+        <span class="touchable secondary-dark-badge" ng-if="sh.info.country.length > 5 && !sh.countryCollapsed" ng-click="sh.countryCollapsed = 1"><i class="ion-ios-more"></i></span>
         <span ng-if="sh.countryCollapsed" class="secondary-dark-badge" ng-repeat="item in sh.info.country track by $index">{{item | countryMap}}</span>
-        <span class="touchable" ng-if="sh.info.country.length > 5 && sh.countryCollapsed" ng-click="sh.countryCollapsed = 0"> HIDE</span>
+        <span class="touchable secondary-dark-badge" ng-if="sh.info.country.length > 5 && sh.countryCollapsed" ng-click="sh.countryCollapsed = 0"><i class="ion-ios-arrow-left"></i></span>
 
     </p>
-    <p><strong>Languages: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.language">{{item | languageMap}}</span></p>
+    <p>
+        <strong>Languages: </strong>
+        <span ng-if="!sh.languageCollapsed && $index < 5" class="secondary-dark-badge" ng-repeat="item in sh.info.language track by $index">{{item | languageMap}}</span>
+        <span class="touchable secondary-dark-badge" ng-if="sh.info.language.length > 5 && !sh.languageCollapsed" ng-click="sh.languageCollapsed = 1"><i class="ion-ios-more"></i></span>
+        <span ng-if="sh.languageCollapsed" class="secondary-dark-badge" ng-repeat="item in sh.info.language track by $index">{{item | languageMap}}</span>
+        <span class="touchable secondary-dark-badge" ng-if="sh.info.language.length > 5 && sh.languageCollapsed" ng-click="sh.languageCollapsed = 0"><i class="ion-ios-arrow-left"></i></span>
+    </p>
     <p><strong>Devices: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.device">{{item}}</span></p>
     <p><strong>Operating Systems: </strong> <span class="secondary-dark-badge" ng-repeat="item in sh.info.os">{{item}}</span></p>
 </div>
