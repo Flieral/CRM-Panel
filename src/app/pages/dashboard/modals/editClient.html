@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="sh.cancel()"><span aria-hidden="true">×</span></button>
+    <h3 class="modal-title">Edit Client: "{{sh.formData.username}}"</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label for="companyName">Company Name</label>
+                <input type="text" id="companyName" class="form-control" ng-model="sh.formData.companyName">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" ng-model="sh.formData.email">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label>Registration Country</label>
+                <ui-select ng-model="sh.country"
+                           class="btn-group bootstrap-select form-control"
+                           search-enabled="true">
+                    <ui-select-match placeholder="Country">
+                        {{$select.selected.name}}
+                    </ui-select-match>
+                    <ui-select-choices
+                            repeat="item in sh.countries | filter: $select.search">
+                        <span ng-bind-html="item.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="sh.cancel()">Close</button>
+    <button class="btn btn-success" type="button" ng-click="sh.submitForm()">Submit</button>
+</div>

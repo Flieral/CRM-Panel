@@ -4,6 +4,7 @@ angular.module('BlurAdmin', [
     'ngAnimate',
     'ui.bootstrap',
     'ui.sortable',
+    'ui.select',
     'ui.router',
     '720kb.tooltips',
     'ngTouch',

@@ -17,14 +17,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-click="vm.getClientsCampaign(client)" ng-class="{'secendory-light-back': (client.selected)}"
+                        <tr ng-class="{'secendory-light-back': (client.selected)}"
                             ng-repeat="client in vm.allClients track by $index" class="no-top-border touchable">
-                            <td>{{$index + 1}}</td>
-                            <td>{{client.companyName}}</td>
-                            <td>{{client.email}}</td>
-                            <td>{{client.username}}</td>
-                            <td>{{client.registrationIPAddress}}</td>
-                            <td>{{client.registrationCountry | countryMap}}</td>
+                            <td ng-click="vm.getClientsCampaign(client)">{{$index + 1}}</td>
+                            <td ng-click="vm.getClientsCampaign(client)">{{client.companyName}}</td>
+                            <td ng-click="vm.getClientsCampaign(client)">{{client.email}}</td>
+                            <td ng-click="vm.getClientsCampaign(client)">{{client.username}}</td>
+                            <td ng-click="vm.getClientsCampaign(client)">{{client.registrationIPAddress}}</td>
+                            <td ng-click="vm.getClientsCampaign(client)">{{client.registrationCountry | countryMap}}</td>
                             <td>
                                 <button class="btn btn-with-icon btn-info" ng-click="vm.editClient(client)"><i class="ion-edit"></i>Edit</button>
                                 <button class="btn btn-with-icon btn-danger" ng-click="vm.removeClient(client)"><i class="ion-trash-a"></i>Remove</button>
@@ -54,16 +54,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-click="vm.getCampaignsSubcampaign(campaign)"  ng-repeat="campaign in vm.clientsCampaigns track by $index" ng-class="{'secendory-light-back': (campaign.selected)}" class="no-top-border touchable">
-                            <td>{{$index + 1}}</td>
-                            <td>{{campaign.name}}</td>
-                            <td>{{campaign.message}}</td>
-                            <td>{{campaign.mediaStyle}}</td>
-                            <td>{{campaign.startStyle}}</td>
-                            <td>{{campaign.status}}</td>
-                            <td>{{campaign.budget}} $</td>
-                            <td>{{campaign.beginningTime | date:'MM/dd/yyyy @ h:mma'}}</td>
-                            <td>{{campaign.endingTime | date:'MM/dd/yyyy @ h:mma'}}</td>
+                        <tr ng-repeat="campaign in vm.clientsCampaigns track by $index" ng-class="{'secendory-light-back': (campaign.selected)}" class="no-top-border touchable">
+                            <td ng-click="vm.getCampaignsSubcampaign(campaign)">{{$index + 1}}</td>
+                            <td ng-click="vm.getCampaignsSubcampaign(campaign)">{{campaign.name}}</td>
+                            <td ng-click="vm.getCampaignsSubcampaign(campaign)">{{campaign.message}}</td>
+                            <td ng-click="vm.getCampaignsSubcampaign(campaign)">{{campaign.mediaStyle}}</td>
+                            <td ng-click="vm.getCampaignsSubcampaign(campaign)">{{campaign.startStyle}}</td>
+                            <td ng-click="vm.getCampaignsSubcampaign(campaign)">{{campaign.status}}</td>
+                            <td ng-click="vm.getCampaignsSubcampaign(campaign)">{{campaign.budget}} $</td>
+                            <td ng-click="vm.getCampaignsSubcampaign(campaign)">{{campaign.beginningTime | date:'MM/dd/yyyy @ h:mma'}}</td>
+                            <td ng-click="vm.getCampaignsSubcampaign(campaign)">{{campaign.endingTime | date:'MM/dd/yyyy @ h:mma'}}</td>
                             <td>
                                 <button class="btn btn-with-icon btn-info" ng-click="vm.editCampaign(campaign)"><i class="ion-edit"></i>Edit</button>
                                 <button class="btn btn-with-icon btn-danger" ng-click="vm.removeCampaign(campaign)"><i class="ion-trash-a"></i>Remove</button>

@@ -65,10 +65,45 @@
             })
         };
         vm.editClient = function (client) {
-            $uibModal.open({})
+            $uibModal.open({
+                templateUrl: 'app/pages/dashboard/modals/editClient.html',
+                size: 'md',
+                controllerAs: 'sh',
+                controller: function ($uibModalInstance, $filter, httpWrapper, notificationService) {
+                    var sh = this;
+                    sh.formData = angular.copy(client);
+                    sh.country = {
+                        name: $filter('countryMap')(sh.formData.registrationCountry),
+                        code: sh.formData.registrationCountry
+                    };
+                    sh.countries = $rootScope.configs.countries;
+                    sh.submitForm = function () {
+                        sh.formData.registrationCountry = sh.country.code;
+                        httpWrapper.put(UrlConstants.clientsApi + client.id, sh.formData).success(function (){
+                            notificationService.success("Success", "Editing Client was Done Successfully!");
+                            client = sh.formData;
+                        }).error(function (response){
+                            notificationService.error(response.error.name, response.error.message);
+                        })
+                    };
+                    sh.cancel = function () {
+                        $uibModalInstance.dismiss('cancel');
+                    }
+                }
+            })
+        };
+        vm.editCampaign = function (campaign) {
+            $uibModal.open({
+                templateUrl: 'app/pages/dashboard/modals/editCampaign.html',
+                size: 'md',
+                controllerAs: 'sh',
+                controller: function ($uibModalInstance, $filter, httpWrapper, notificationService) {
+                    var sh = this;
+
+                }
+            })
         };
         vm.removeClient = function (client) {
-            $scope.model.selectedTab = 0;
             confirmModal.open('Removing ' + client.username, 'Are you sure to remove the client? The action could not be undone!').then(function () {
                 httpWrapper.delete(UrlConstants.clientsApi + client.id).success(function () {
                     httpWrapper.get(UrlConstants.clientsApi).success(function (response) {
@@ -81,7 +116,6 @@
             })
         };
         vm.removeCampaign = function (campaign) {
-            $scope.model.selectedTab = 0;
             confirmModal.open('Removing ' + campaign.name, 'Are you sure to remove the campaign? The action could not be undone!').then(function () {
                 httpWrapper.delete(UrlConstants.clientsApi + campaign.clientId + '/campaign/' + campaign.id).success(function () {
                     notificationService.success('Success', 'Deleted the campaign successfully!');
@@ -91,7 +125,6 @@
             })
         };
         vm.removeSubcampaign = function (subcampaign) {
-            $scope.model.selectedTab = 0;
             confirmModal.open('Removing ' + campaign.name, 'Are you sure to remove the campaign? The action could not be undone!').then(function () {
                 httpWrapper.delete(UrlConstants.clientsApi + client.id + '/campaign/' + campaign.id).success(function () {
                     notificationService.success('Success', 'Deleted the campaign successfully!');
@@ -101,31 +134,31 @@
             })
         };
         vm.showSettings = function (subcampaign) {
-            httpWrapper.get(UrlConstants.subcampaign + subcampaign.id +'/setting').success(function (response){
+            httpWrapper.get(UrlConstants.subcampaign + subcampaign.id + '/setting').success(function (response) {
                 $uibModal.open({
                     templateUrl: 'app/pages/dashboard/modals/subcampaignInfo.html',
                     size: 'md',
                     controllerAs: 'sh',
-                    controller: function ($uibModalInstance){
+                    controller: function ($uibModalInstance) {
                         var sh = this;
                         sh.subcampaign = subcampaign;
                         sh.info = response;
-                        sh.cancel = function (){
+                        sh.cancel = function () {
                             $uibModalInstance.dismiss('cancel');
                         }
                     }
                 })
             })
         };
-        vm.setStatus = function (subcampaign, str){
+        vm.setStatus = function (subcampaign, str) {
             var data = {
                 status: str
             };
             httpWrapper.put(UrlConstants.campaigns + vm.selection.campaign.id + '/subcampaigns/' + subcampaign.id, data)
-                .success(function (response){
-                notificationService.success('Status Set Successfully');
-                subcampaign.status = str;
-            }).error(function (){
+                .success(function (response) {
+                    notificationService.success('Status Set Successfully');
+                    subcampaign.status = str;
+                }).error(function () {
                 notificationService.error("There was an error in changing status");
             })
         }
