@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="sh.cancel()"><span aria-hidden="true">×</span></button>
+    <h3 class="modal-title">Edit Campaign: "{{sh.formData.name}}"</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label for="campaignName">Campaign Name</label>
+                <input type="text" id="campaignName" class="form-control" ng-model="sh.formData.name">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label for="budget">Budget</label>
+                <input type="number" id="budget" class="form-control" ng-model="sh.formData.budget">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label>Media Style</label>
+                <ui-select ng-model="sh.formData.mediaStyle"
+                           class="btn-group bootstrap-select form-control"
+                           search-enabled="true">
+                    <ui-select-match placeholder="Media Style">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices
+                            repeat="item in sh.mediaStyles | filter: $select.search">
+                        <span ng-bind-html="item"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label>Start Style</label>
+                <ui-select ng-model="sh.formData.startStyle"
+                           class="btn-group bootstrap-select form-control"
+                           search-enabled="true">
+                    <ui-select-match placeholder="Start Style">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices
+                            repeat="item in sh.startStyles | filter: $select.search">
+                        <span ng-bind-html="item"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="message">Message</label>
+                <input type="text" id="message" class="form-control" ng-model="sh.formData.message">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="sh.cancel()">Close</button>
+    <button class="btn btn-success" type="button" ng-click="sh.submitForm()">Submit</button>
+</div>

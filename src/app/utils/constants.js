@@ -2,13 +2,23 @@ var apiUrl = {
     announcer: 'http://178.62.66.155:3000/api/',
     publisher: 'http://178.62.66.155:3005/api/'
 };
-clientsApi = apiUrl.announcer + 'clients/';
+clientsApiAnnouncer = apiUrl.announcer + 'clients/';
+clientsApiPublisher = apiUrl.publisher + 'clients/';
 
 angular.module("utils.apiUrls", []).constant("UrlConstants", {
-    login: clientsApi + 'login',
+    apiUrl: {
+        announcer: apiUrl.announcer,
+        publisher: apiUrl.publisher
+    },
+    login: {
+        announcer: clientsApiAnnouncer + 'login',
+        publisher: clientsApiPublisher + 'login'
+    },
     campaigns: apiUrl.announcer + 'campaigns/',
-    clientsApi: clientsApi,
+    clients: {
+        announcer: clientsApiAnnouncer,
+        publisher: clientsApiPublisher
+    },
     subcampaign: apiUrl.announcer + 'subcampaigns/',
-    apiUrlAnnouncer: apiUrl.announcer,
-    apiUrlPublisher: apiUrl.publisher
+    application: apiUrl.publisher + 'applications/'
 });

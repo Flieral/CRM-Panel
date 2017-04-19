@@ -25,11 +25,11 @@
             });
     }
 
-    function publisherControllerFunction($uibModal, $scope, $rootScope, notificationService, httpWrapper, UrlConstants, confirmModal) {
+    function publisherControllerFunction($uibModal, $scope, $rootScope, notificationService, httpWrapperPu, UrlConstants, confirmModal) {
         var vm = this;
         $scope.model = {};
         vm.selection = {};
-        httpWrapper.get(UrlConstants.clientsApi).success(function (response) {
+        httpWrapperPu.get(UrlConstants.clients.publisher).success(function (response) {
             vm.allClients = response;
         });
         vm.getClientsApplications = function (client) {
@@ -41,7 +41,7 @@
                     vm.selection.client = client;
                 }
             }
-            httpWrapper.get(UrlConstants.clientsApi + client.id + '/applications').success(function (response) {
+            httpWrapperPu.get(UrlConstants.clients.publisher + client.id + '/applications').success(function (response) {
                 vm.clientsApplications = response;
                 vm.selection.application = null;
                 vm.selection.placement = null;
@@ -49,6 +49,22 @@
                 // vm.campaignsSubcampaign = [];
             })
         };
+        vm.getAppsPlacements = function (app){
+            for (var i = 0; i < vm.clientsApplications.length; i++) {
+                if (vm.clientsApplications [i] != app)
+                    vm.clientsApplications [i].selected = false;
+                else {
+                    app.selected = true;
+                    vm.selection.application = app;
+                }
+            }
+            httpWrapperPu.get(UrlConstants.application + app.id + '/placements').success(function (response) {
+                vm.appsPlacements = response;
+                vm.selection.placement = null;
+                $scope.model.selectedTab = 2;
+                // vm.campaignsSubcampaign = [];
+            })
+        }
 
     }
 })();

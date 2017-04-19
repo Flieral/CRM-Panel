@@ -19,7 +19,8 @@ angular.module('BlurAdmin', [
     'BlurAdmin.pages',
     'utils.apiUrls',
     'utils.notification',
-    'utils.httpWrapper',
+    'utils.httpWrapperPublisher',
+    'utils.httpWrapperAnnouncer',
     'utils.confirmModal',
     'utils.filters'
 ]).config(['$httpProvider', function($httpProvider) {

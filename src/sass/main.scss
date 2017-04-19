@@ -206,3 +206,13 @@ div.panel{
     }
   }
 }
+.ui-select-bootstrap{
+  .ui-select-choices-row{
+    &.active{
+      color: white !important;
+      span{
+        color: white !important;
+      }
+    }
+  }
+}

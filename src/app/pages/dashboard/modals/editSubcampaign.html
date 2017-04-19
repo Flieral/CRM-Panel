@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="sh.cancel()"><span aria-hidden="true">×</span></button>
+    <h3 class="modal-title">Edit Subcampaign: "{{sh.formData.name}}"</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label for="subcampaignName">Subcampaign Name</label>
+                <input type="text" id="subcampaignName" class="form-control" ng-model="sh.formData.name">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label for="budget">Minimum Budget</label>
+                <input type="number" id="budget" class="form-control" ng-model="sh.formData.minBudget">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" id="price" class="form-control" ng-model="sh.formData.price">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label>Plan</label>
+                <ui-select ng-model="sh.plan"
+                           class="btn-group bootstrap-select form-control"
+                           search-enabled="true">
+                    <ui-select-match placeholder="Plan">
+                        {{$select.selected.name}}
+                    </ui-select-match>
+                    <ui-select-choices
+                            repeat="item in sh.subcampaignPlans | filter: $select.search">
+                        <span ng-bind-html="item.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label>Style</label>
+                <ui-select ng-model="sh.formData.style"
+                           class="btn-group bootstrap-select form-control"
+                           search-enabled="true">
+                    <ui-select-match placeholder="Style">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices
+                            repeat="item in sh.placementStyles | filter: $select.search">
+                        <span ng-bind-html="item"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="sh.cancel()">Close</button>
+    <button class="btn btn-success" type="button" ng-click="sh.submitForm()">Submit</button>
+</div>

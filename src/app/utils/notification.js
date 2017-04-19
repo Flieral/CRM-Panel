@@ -19,7 +19,7 @@ function notificationServiceFunction(toastr) {
         toastr.clear();
     };
     this.info = function (title, text) {
-      toastr.info(text, title, options);
+        toastr.info(text, title, options);
     };
     this.warning = function (title, text) {
         toastr.warning(text, title, options);

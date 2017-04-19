@@ -1,10 +1,10 @@
-angular.module('utils.httpWrapper', []).service('httpWrapper', ['$http', '$q', '$cookies','$rootScope', httpWrapperFunction]);
-function httpWrapperFunction($http, $q, $cookies, $rootScope) {
-    var toAdd = '?access_token=' + $rootScope.access_token;
+angular.module('utils.httpWrapperAnnouncer', []).service('httpWrapperAn', ['$http', '$q', '$cookies','$rootScope','UrlConstants', httpWrapperFunction]);
+function httpWrapperFunction($http, $q, $cookies, $rootScope, UrlConstants) {
+    var toAdd = '?access_token=' + $rootScope.access_token.announcer;
     function getAccessToken() {
         var deferred = $q.defer();
-        if ($cookies.get('token')) {
-            deferred.resolve($cookies.get('token'));
+        if ($cookies.get('token_an')) {
+            deferred.resolve($cookies.get('token_an'));
         } else {
             deferred.reject();
         }

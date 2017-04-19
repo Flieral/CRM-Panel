@@ -13,13 +13,16 @@
             console.log($cookies.getAll());
             vm.click = function () {
                 console.log(vm.formData);
-                $http.post(UrlConstants.login, vm.formData).success(function (response) {
-                    $rootScope.loggedIn = true;
-                    $state.go('dashboard');
-                    $cookies.put('token', response.id);
-                    $rootScope.access_token = response.id;
+                $http.post(UrlConstants.login.announcer, vm.formData).success(function (response) {
+                    $cookies.put('token_an', response.id);
+                    $rootScope.access_token.announcer = response.id;
                     $cookies.put('userId', response.userId);
-                    console.log(response);
+                    $rootScope.userId = response.userId;
+                    $http.post(UrlConstants.login.publisher, vm.formData).success(function (response2){
+                        $state.go('dashboard');
+                        $cookies.put('token_pu', response2.id);
+                        $rootScope.access_token.publisher = response2.id;
+                    })
                 }).error(function (){
                     notificationService.error('Error', 'Please enter a valid email and password');
                     $rootScope.loggedIn = false;

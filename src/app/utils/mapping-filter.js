@@ -24,4 +24,15 @@ angular.module("utils.filters", [])
             }
         }
     }
-});
+}).filter('planMap', function ($rootScope){
+    return function (input){
+        var output;
+        for (var i = 0; i < $rootScope.configs.subcampaignPlan.length; i++){
+            var subcampaignPlan = $rootScope.configs.subcampaignPlan[i];
+            if (subcampaignPlan.code == input){
+                output = subcampaignPlan.name;
+                return output;
+            }
+        }
+    }
+});;

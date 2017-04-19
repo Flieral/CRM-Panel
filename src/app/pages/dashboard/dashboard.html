@@ -96,7 +96,7 @@
                             <td>{{$index + 1}}</td>
                             <td>{{subcampaign.name}}</td>
                             <td>{{subcampaign.minBudget}} $</td>
-                            <td>{{subcampaign.plan}}</td>
+                            <td>{{subcampaign.plan | planMap}}</td>
                             <td>{{subcampaign.price}} $</td>
                             <td class="status-cell">
                                 <button ng-click="vm.setStatus(subcampaign, 'Pending')" uib-tooltip="Pending" ng-disabled="subcampaign.status == 'Pending'" class="btn btn-default"> <span><i class="ion-minus-round color-warning"></i></span></button>

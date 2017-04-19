@@ -13,22 +13,22 @@
                             <th>Username</th>
                             <th>Ip Address</th>
                             <th>Country</th>
-                            <th>Operation</th>
+                            <!--<th>Operation</th>-->
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-click="vm.getClientsApplications(client)" ng-class="{'secendory-light-back': (client.selected)}"
+                        <tr  ng-class="{'secendory-light-back': (client.selected)}"
                             ng-repeat="client in vm.allClients track by $index" class="no-top-border touchable">
-                            <td>{{$index + 1}}</td>
-                            <td>{{client.companyName}}</td>
-                            <td>{{client.email}}</td>
-                            <td>{{client.username}}</td>
-                            <td>{{client.registrationIPAddress}}</td>
-                            <td>{{client.registrationCountry | countryMap}}</td>
-                            <td>
+                            <td ng-click="vm.getClientsApplications(client)">{{$index + 1}}</td>
+                            <td ng-click="vm.getClientsApplications(client)">{{client.companyName}}</td>
+                            <td ng-click="vm.getClientsApplications(client)">{{client.email}}</td>
+                            <td ng-click="vm.getClientsApplications(client)">{{client.username}}</td>
+                            <td ng-click="vm.getClientsApplications(client)">{{client.registrationIPAddress}}</td>
+                            <td ng-click="vm.getClientsApplications(client)">{{client.registrationCountry | countryMap}}</td>
+                           <!-- <td>
                                 <button class="btn btn-with-icon btn-info" ng-click="vm.editClient(client)"><i class="ion-edit"></i>Edit</button>
                                 <button class="btn btn-with-icon btn-danger" ng-click="vm.removeClient(client)"><i class="ion-trash-a"></i>Remove</button>
-                            </td>
+                            </td>-->
                         </tr>
                         </tbody>
                     </table>
@@ -37,37 +37,33 @@
             <uib-tab index="1" heading="Client's Applications">
                 <div class="horizontal-scroll">
                     <h2 ng-if="vm.selection.client == null">Please select a client at first!</h2>
-                    <h2 ng-if="vm.clientsCampaigns.length <= 0">There is no application registered with selected client!</h2>
-                    <table class="table table-hover" ng-if="vm.clientsCampaigns.length > 0 && vm.selection.client != null">
+                    <h2 ng-if="vm.clientsApplications.length <= 0">There is no application registered with selected client!</h2>
+                    <table class="table table-hover" ng-if="vm.clientsApplications.length > 0 && vm.selection.client != null">
                         <thead>
                         <tr class="black-muted-bg">
                             <th>#</th>
-                            <th>Campaign Name</th>
+                            <th>Application Name</th>
                             <th>Message</th>
-                            <th>Media Style</th>
-                            <th>Start Style</th>
+                            <th>Credit</th>
+                            <th>Operating System</th>
                             <th>Status</th>
-                            <th>Budget</th>
-                            <th>Beginning Time</th>
-                            <th>Ending Time</th>
-                            <th>Operation</th>
+                            <!--<th>Operation</th>-->
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-click="vm.getCampaignsSubcampaign(campaign)"  ng-repeat="campaign in vm.clientsCampaigns track by $index" ng-class="{'secendory-light-back': (campaign.selected)}" class="no-top-border touchable">
-                            <td>{{$index + 1}}</td>
-                            <td>{{campaign.name}}</td>
-                            <td>{{campaign.message}}</td>
-                            <td>{{campaign.mediaStyle}}</td>
-                            <td>{{campaign.startStyle}}</td>
-                            <td>{{campaign.status}}</td>
-                            <td>{{campaign.budget}} $</td>
-                            <td>{{campaign.beginningTime | date:'MM/dd/yyyy @ h:mma'}}</td>
-                            <td>{{campaign.endingTime | date:'MM/dd/yyyy @ h:mma'}}</td>
-                            <td>
+                        <tr ng-repeat="app in vm.clientsApplications track by $index" ng-class="{'secendory-light-back': (campaign.selected)}" class="no-top-border touchable">
+                            <td ng-click="vm.getAppsPlacements(app)">{{$index + 1}}</td>
+                            <td ng-click="vm.getAppsPlacements(app)">{{app.name}}</td>
+                            <td ng-click="vm.getAppsPlacements(app)">{{app.message}}</td>
+                            <td ng-click="vm.getAppsPlacements(app)">{{app.credit}}</td>
+                            <td ng-click="vm.getAppsPlacements(app)">{{app.operatingSystem}}</td>
+                            <td ng-click="vm.getAppsPlacements(app)">{{app.status}}</td>
+                            <td ng-click="vm.getAppsPlacements(app)">{{app.beginningTime | date:'MM/dd/yyyy @ h:mma'}}</td>
+                            <td ng-click="vm.getAppsPlacements(app)">{{app.endingTime | date:'MM/dd/yyyy @ h:mma'}}</td>
+                            <!--<td ng-click="vm.getAppsPlacements(app)">
                                 <button class="btn btn-with-icon btn-info" ng-click="vm.editCampaign(campaign)"><i class="ion-edit"></i>Edit</button>
                                 <button class="btn btn-with-icon btn-danger" ng-click="vm.removeCampaign(campaign)"><i class="ion-trash-a"></i>Remove</button>
-                            </td>
+                            </td>-->
                         </tr>
                         </tbody>
                     </table>
@@ -76,35 +72,37 @@
             <uib-tab index="2" heading="Application's Placement">
                 <div class="horizontal-scroll">
                     <h2 ng-if="vm.selection.client == null">Please select a client at first!</h2>
-                    <h2 ng-if="vm.selection.campaign == null">Please select an application at first!</h2>
-                    <h2 ng-if="vm.campaignsSubcampaign.length <= 0 && vm.selection.campaign != null">There is no subcampaign registered with selected campaign!</h2>
-                    <table class="table table-hover" ng-if="vm.campaignsSubcampaign.length > 0 && vm.selection.campaign != null">
+                    <h2 ng-if="vm.selection.application == null">Please select an application at first!</h2>
+                    <h2 ng-if="vm.appsPlacements.length <= 0 && vm.selection.application != null">There is no subcampaign registered with selected campaign!</h2>
+                    <table class="table table-hover" ng-if="vm.appsPlacements.length > 0 && vm.selection.application != null">
                         <thead>
                         <tr class="black-muted-bg">
                             <th>#</th>
-                            <th>Subcampaign Name</th>
-                            <th>Minimum Budget</th>
-                            <th>Plan</th>
-                            <th>Price</th>
+                            <th>Name</th>
+                            <th>Minimum Credit</th>
+                            <th>Message</th>
                             <th>Status</th>
                             <th>Style</th>
-                            <th>Operation</th>
+                            <th>Beginning Time</th>
+                            <th>Ending Time</th>
+                            <!--<th>Operation</th>-->
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-click="vm.getCampaignsSubcampaign()"  ng-repeat="subcampaign in vm.campaignsSubcampaign track by $index" ng-class="{'secendory-light-back': (subcampaign.selected)}" class="no-top-border">
+                        <tr  ng-repeat="placement in vm.appsPlacements track by $index" ng-class="{'secendory-light-back': (subcampaign.selected)}" class="no-top-border">
                             <td>{{$index + 1}}</td>
-                            <td>{{subcampaign.name}}</td>
-                            <td>{{subcampaign.minBudget}} $</td>
-                            <td>{{subcampaign.plan}}</td>
-                            <td>{{subcampaign.price}} $</td>
-                            <td>{{subcampaign.status}}</td>
-                            <td>{{subcampaign.style}}</td>
-                            <td>
-                                <button class="btn btn-with-icon btn-info" ng-click="vm.editSubcampaign(subcampaign)"><i class="ion-edit"></i>Edit</button>
-                                <button class="btn btn-with-icon btn-danger" ng-click="vm.removeSubcampaign(subcampaign)"><i class="ion-trash-a"></i>Remove</button>
-                                <button class="btn btn-with-icon btn-primary" ng-click="vm.showSettings(subcampaign)"><i class="ion-ios-information-outline"></i>Show info</button>
-                            </td>
+                            <td>{{placement.name}}</td>
+                            <td>{{placement.minCredit}} $</td>
+                            <td>{{placement.message}}</td>
+                            <td>{{placement.status}} $</td>
+                            <td>{{placement.style}}</td>
+                            <td>{{placement.beginningTime| date:'MM/dd/yyyy @ h:mma'}}</td>
+                            <td>{{placement.endingTime| date:'MM/dd/yyyy @ h:mma'}}</td>
+                        <!--    <td>
+                                <button class="btn btn-with-icon btn-info"><i class="ion-edit"></i>Edit</button>
+                                <button class="btn btn-with-icon btn-danger"><i class="ion-trash-a"></i>Remove</button>
+                                <button class="btn btn-with-icon btn-primary"><i class="ion-ios-information-outline"></i>Show info</button>
+                            </td>-->
                         </tr>
                         </tbody>
                     </table>

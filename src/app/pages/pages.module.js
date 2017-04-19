@@ -25,16 +25,30 @@
     /** @ngInject */
     function runConfig($rootScope, $state, $cookies, $http, UrlConstants, notificationService, $timeout) {
         $rootScope.configs = {};
+        $rootScope.access_token = {};
         $http.get('/assets/conf/country.json').success(function(response){
             $rootScope.configs.countries = response;
         });
         $http.get('/assets/conf/language.json').success(function(response){
             $rootScope.configs.languages = response;
         });
-        if ($cookies.get('token') && $cookies.get('userId')) {
-            $rootScope.access_token = $cookies.get('token');
+        $http.get('/assets/conf/startStyle.json').success(function(response){
+            $rootScope.configs.startStyle = response;
+        });
+        $http.get('/assets/conf/mediaStyle.json').success(function(response){
+            $rootScope.configs.mediaStyle = response;
+        });
+        $http.get('/assets/conf/placementStyle.json').success(function(response){
+            $rootScope.configs.placementStyle = response;
+        });
+        $http.get('/assets/conf/subcampiagnPlan.json').success(function(response){
+            $rootScope.configs.subcampaignPlan = response;
+        });
+        if ($cookies.get('token_an') && $cookies.get('token_pu') && $cookies.get('userId')) {
+            $rootScope.access_token.announcer = $cookies.get('token_an');
+            $rootScope.access_token.publisher = $cookies.get('token_pu');
             $rootScope.userId = $cookies.get('userId');
-            $http.get(UrlConstants.clientsApi + $rootScope.userId + '?access_token=' + $rootScope.access_token).success(function (response) {
+            $http.get(UrlConstants.clients.announcer + $rootScope.userId + '?access_token=' + $rootScope.access_token.announcer).success(function (response) {
                 console.log(response);
                 $rootScope.loggedIn = true;
             }).error(function (response) {
@@ -51,7 +65,7 @@
             if (!$rootScope.loggedIn) {
                 if (toState.name != 'login') {
                     event.preventDefault();
-                    $http.get(UrlConstants.clientsApi + $rootScope.userId + '?access_token=' + $rootScope.access_token).success(function (response) {
+                    $http.get(UrlConstants.clients.announcer + $rootScope.userId + '?access_token=' + $rootScope.access_token.announcer).success(function (response) {
                         $rootScope.loggedIn = true;
                         $state.go(toState.name);
                     }).error(function (response) {
